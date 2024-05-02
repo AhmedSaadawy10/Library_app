@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="book_kanban_view" model="ir.ui.view">
+            <field name="name">Book Kanban View</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <kanban class="o_library_book_kanban">
+                    <field name="id"/>
+
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="active"/>
+                    <field name="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img alt="Avatar"
+                                         t-att-src="kanban_image('library.book', 'image',record.id.raw_value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                    <div t-if="record.code.value">
+                                        <t t-esc="record.code.value"/>
+                                    </div>
+                                    <div t-if="record.active.value">
+                                        <field name="active"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="book_search_view" model="ir.ui.view">
+            <field name="name">Book Search View</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="code"/>
+                </search>
+            </field>
+
+        </record>
+
+        <record id="book_tree_view" model="ir.ui.view">
+            <field name="name">Book Tree View</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="active" optional="1"/>
+                    <field name="image" widget="image" options="{'size': [50,50]}"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+
+        </record>
+
+        <record id="book_form_view" model="ir.ui.view">
+            <field name="name">Book Form View</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Basic Info">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="active"/>
+                                <field name="image" widget="image" style="max-height: 100px; max-width: 100px;"/>
+                            </group>
+
+                            <group string="Additional Info">
+                                <field name="date_published"/>
+                                <field name="state"/>
+                                <field name="publisher_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="book_action" model="ir.actions.act_window">
+            <field name="name">Book</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+        <menuitem
+                id="menu_library_book"
+                name="Books"
+                parent="book_menu_root"
+                action="book_action"/>
+    </data>
+</odoo>

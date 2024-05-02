@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem
+                name="Library"
+                id="library_menu"
+                web_icon="library,static/description/icon.png"/>
+
+        <menuitem
+                name="Book"
+                id="book_menu_root"
+                parent="library_menu"/>
+
+        <menuitem
+                name="Publisher"
+                id="publisher_menu_root"
+                parent="library_menu"/>
+
+
+    </data>
+</odoo>
