@@ -16,6 +16,7 @@
         "views/main_menu.xml",
         "views/book_view.xml",
         "views/publisher_view.xml",
+        "wizard/add_publisher_wizard.xml"
     ],
     "depends": ["base", "web"],
 }

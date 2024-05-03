@@ -73,19 +73,32 @@
             <field name="model">library.book</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button string="Add Publisher" type="object" name="action_add_publisher" class="btn-primary"
+                                data-hotkey="q"/>
+                        <button string="Set to Draft" type="object" name="draft" class="btn btn-outline-warning px-3"
+                                invisible="state != 'confirm'"/>
+                        <button string="Confirm" type="object" name="confirm" class="btn btn-outline-success px-3"
+                                invisible="state != 'draft'"/>
+                        <button string="Published" type="object" name="published" class="btn btn-outline-info px-3"
+                                invisible="state != 'confirm'"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <group>
                             <group string="Basic Info">
-                                <field name="name"/>
-                                <field name="code"/>
+                                <field name="name" required="1"/>
+                                <field name="code" required="1"/>
                                 <field name="active"/>
                                 <field name="image" widget="image" style="max-height: 100px; max-width: 100px;"/>
                             </group>
 
                             <group string="Additional Info">
                                 <field name="date_published"/>
+                                <field name="age"/>
                                 <field name="state"/>
-                                <field name="publisher_id"/>
+                                <field name="publisher_id" readonly="1"/>
                             </group>
                         </group>
                     </sheet>

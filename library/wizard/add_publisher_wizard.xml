@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="add_publisher_wizard_form_view" model="ir.ui.view">
+            <field name="name">Add Publisher Form View</field>
+            <field name="model">publisher.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <group class="oe_title">
+                        <field name="book_id" readonly="1"/>
+                        <field name="publisher_id" required="1"/>
+                    </group>
+                    <footer>
+                        <button string="Add Publisher" type="object" name="action_add_publisher" class="oe_highlight"
+                                data-hotkey="q"/>
+
+                        <button string="Cancel" special="cancel" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+
+        </record>
+
+        <record id="publisher_wizard_action" model="ir.actions.act_window">
+            <field name="name">Publisher Wizard Action</field>
+            <field name="res_model">publisher.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="library.add_publisher_wizard_form_view"/>
+            <field name="target">new</field>
+
+        </record>
+    </data>
+</odoo>
