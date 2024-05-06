@@ -21,7 +21,6 @@
 
                 </form>
             </field>
-
         </record>
 
         <record id="publisher_wizard_action" model="ir.actions.act_window">

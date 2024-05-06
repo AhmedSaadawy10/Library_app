@@ -12,11 +12,14 @@
     "category": "Productivity",
     "application": True,
     "data": [
+        "data/data.xml",
+        "data/cron.xml",
         "security/ir.model.access.csv",
         "views/main_menu.xml",
         "views/book_view.xml",
         "views/publisher_view.xml",
-        "wizard/add_publisher_wizard.xml"
+        "views/sale_order_inherit_view.xml",
+        "wizard/add_publisher_wizard.xml",
     ],
-    "depends": ["base", "web"],
+    "depends": ["base", "web", "sale_management", "mail"],
 }

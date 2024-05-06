@@ -5,10 +5,11 @@ from odoo import models, fields, api, exceptions
 
 class Book(models.Model):
     _name = 'library.book'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Book'
 
-    name = fields.Char('Title', required=True)
-    code = fields.Char()
+    name = fields.Char('Title', required=True, tracking=1)
+    code = fields.Char(tracking=1)
     _sql_constraints = [
         ("unique_code", "unique('code')", "Code must be unique")
     ]
@@ -23,6 +24,8 @@ class Book(models.Model):
 
     image = fields.Binary()
     publisher_id = fields.Many2one("library.publisher")
+    book_line_ids = fields.One2many("library.book.line", "book_id")
+    ref = fields.Char(default='New')
 
     def action_add_publisher(self):
         action = self.env['ir.actions.actions']._for_xml_id('library.publisher_wizard_action')
@@ -49,10 +52,14 @@ class Book(models.Model):
         for rec in self:
             rec.state = "draft"
 
+    def server_published_state(self):
+        for rec in self:
+            rec.state = "published"
+
     @api.model
     def _create(self, vals):
         res = super(Book, self)._create(vals)
-        print("inside create method")
+        res.ref = self.env['ir.sequence'].next_by_code('book.ref.seq')
         return res
 
     def write(self, vals):
@@ -78,3 +85,17 @@ class Book(models.Model):
                 rec.age = relativedelta(fields.Date.today(), rec.date_published).years
             else:
                 rec.age = False
+
+    @api.model
+    def archive_book(self):
+        print('inside archive book')
+
+
+class BookLine(models.Model):
+    _name = 'library.book.line'
+    _description = 'Book Lines'
+
+    name = fields.Char('Title', required=True)
+    date = fields.Date(default=fields.Date.today())
+    description = fields.Text()
+    book_id = fields.Many2one("library.book")
