@@ -98,7 +98,7 @@
                         <group>
                             <group string="Basic Info">
                                 <field name="name" required="1"/>
-                                <field name="code" required="1"/>
+                                <field name="code" required="1" />
                                 <field name="active"/>
                                 <field name="image" widget="image" style="max-height: 100px; max-width: 100px;"/>
                             </group>

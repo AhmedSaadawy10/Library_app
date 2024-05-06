@@ -14,6 +14,9 @@
     "data": [
         "data/data.xml",
         "data/cron.xml",
+        "reports/book_print_template.xml",
+        "reports/book_print.xml",
+        "security/security.xml",
         "security/ir.model.access.csv",
         "views/main_menu.xml",
         "views/book_view.xml",
